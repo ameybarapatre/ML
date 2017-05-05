@@ -90,7 +90,7 @@ def matelabs_shapes(train = True , checkpoint = 'matelabs_model.ckpt', train_ima
 
 
         cross_entropy = tf.divide(tf.reduce_sum(tf.contrib.losses.sparse_softmax_cross_entropy(labels=tf.cast(y_ , tf.int32),logits= y_conv)) , 50 )
-        train_step = tf.train.AdamOptimizer(learning_rate=0.0001).minimize(cross_entropy)
+        train_step = tf.train.AdamOptimizer(learning_rate=0.001).minimize(cross_entropy)
         taccuracy= tf.equal(tf.argmax(y_conv,1), tf.cast(y_ , tf.int64))
 
         accuracy =  tf.divide( tf.reduce_sum(tf.cast(taccuracy , tf.int32))  , 100 )
@@ -111,12 +111,7 @@ def matelabs_shapes(train = True , checkpoint = 'matelabs_model.ckpt', train_ima
         scaler = preprocessing.StandardScaler()
         scaler.fit(image_data)
         image_data = scaler.transform(image_data)
-        pca= PCA(n_components=200 , whiten  = True)
-        pca.fit(image_data)
-        print(pca.explained_variance_ratio_.sum())
-        x1_n = pca.transform(image_data)
-        x1_n = pca.inverse_transform(x1_n)
-
+        x1_n = image_data
         def shuffle_in_unison(a, b):
             assert len(a) == len(b)
             shuffled_a = np.empty(a.shape, dtype=a.dtype)
@@ -145,10 +140,9 @@ def matelabs_shapes(train = True , checkpoint = 'matelabs_model.ckpt', train_ima
             image_data = np.loadtxt(test_image, delimiter=',' , dtype='float32')
             label_data = np.loadtxt(test_label , delimiter =',' , dtype='float32')
             image_data = scaler.transform(image_data)
-            image_data_n = pca.transform(image_data)
-            image_data_n = pca.inverse_transform(image_data_n)
-                #transforming the data the same way as the training data
-            x1, y2 = image_data_n, label_data
+
+
+            x1, y2 = image_data, label_data
 
 
             saver.restore(session, "./")
