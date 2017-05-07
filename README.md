@@ -12,7 +12,7 @@ Convolutional Model:
 It has 4 CNN layers ,2 Norm layers , 2 Max Pool layers , and the final layers are two densely connected layers
 with 5 outputs as logits.
 
-Convolutional Model yeilds 0.47 Precision
+Convolutional Model yields 0.47 Precision
 
 P.S:
 Will be adding Metagraph saving and importing soon.
@@ -22,7 +22,7 @@ SVM Classifier :
 
 PCA is applied and dimensionality is reduced to 50 from 784 (28 x 28).
 
-SVM Classifier yeilds  0.44 Precision
+SVM Classifier yields  0.44 Precision
 
 
 
