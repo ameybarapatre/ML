@@ -14,6 +14,9 @@ with 5 outputs as logits.
 
 Convolutional Model yeilds 0.47 Precision
 
+P.S:
+Will be adding Metagraph saving and importing soon.
+
 
 SVM Classifier :
 
